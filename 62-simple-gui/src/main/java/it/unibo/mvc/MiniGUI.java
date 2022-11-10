@@ -15,6 +15,13 @@ import java.util.Random;
  * This application does not exploit the model-view-controller pattern, and as
  * such is just to be used to learn the basics, not as a template for your
  * applications.
+ * -->
+ * Questa classe è una semplice applicazione che scrive un numero casuale su un
+ * file.
+ * Questa applicazione non sfrutta il modello model-view-controller, e come
+ * tale è solo per essere usato per imparare le basi, non come modello per le
+ * tue
+ * applicazioni.
  */
 public class MiniGUI {
 
@@ -28,10 +35,15 @@ public class MiniGUI {
      */
     public MiniGUI() {
         final JPanel canvas = new JPanel();
+        final JPanel myCanvas = new JPanel();
         canvas.setLayout(new BorderLayout());
+        myCanvas.setLayout(new BorderLayout());
         final JButton write = new JButton("Print a random number on standard output");
+        final JButton myWrite = new JButton("My window: Print a random number on standard output");
         canvas.add(write, BorderLayout.CENTER);
+        myCanvas.add(myWrite, BorderLayout.CENTER);
         frame.setContentPane(canvas);
+        frame.setContentPane(myCanvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         /*
          * Handlers
@@ -39,6 +51,14 @@ public class MiniGUI {
         write.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
+                System.out.println(randomGenerator.nextInt());
+            }
+        });
+        myWrite.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(final ActionEvent event) {
+                // TODO Auto-generated method stub
                 System.out.println(randomGenerator.nextInt());
             }
         });
@@ -53,6 +73,16 @@ public class MiniGUI {
          * documentation about this issue). It is MUCH better than manually
          * specify the size of a window in pixel: it takes into account the
          * current resolution.
+         * -->
+         * Rendi il tuo oggetto frame un quinto della risoluzione dello schermo. Questo
+         * stesso
+         * è sufficiente per una singola configurazione dello schermo. In caso di
+         * multiplo
+         * monitor, il primario è selezionato. Al fine di trattare coerentemente con
+         * configurazioni multimonitor, esistono altre strutture (vedere il Java
+         * documentazione su questo problema). È MOLTO meglio che manualmente
+         * specificare la dimensione di una finestra in pixel: tiene conto del
+         * Risoluzione attuale.
          */
         final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         final int sw = (int) screen.getWidth();
@@ -62,6 +92,13 @@ public class MiniGUI {
          * Instead of appearing at (0,0), upper left corner of the screen, this
          * flag makes the OS window manager take care of the default positioning
          * on screen. Results may vary, but it is generally the best choice.
+         * -->
+         * Invece di apparire in (0,0), nell'angolo superiore sinistro dello schermo,
+         * questo
+         * flag fa sì che il gestore di finestre del sistema operativo si occupi del
+         * posizionamento predefinito
+         * sullo schermo. I risultati possono variare, ma è generalmente la scelta
+         * migliore.
          */
         frame.setLocationByPlatform(true);
         /*
@@ -78,7 +115,7 @@ public class MiniGUI {
      * Launches the application.
      *
      * @param args
-     *            ignored
+     *             ignored
      */
     public static void main(final String... args) {
         new MiniGUI().display();
