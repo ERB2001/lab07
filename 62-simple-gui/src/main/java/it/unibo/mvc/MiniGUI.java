@@ -6,11 +6,13 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
-
+import java.awt.*;
+import javax.swing.*;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  * This class is a simple application that writes a random number on a file.
@@ -39,29 +41,45 @@ public class MiniGUI {
         final JPanel canvas = new JPanel();
         final JPanel myCanvas = new JPanel();
         canvas.setLayout(new BorderLayout());
-        myCanvas.setLayout(new BoxLayout(myCanvas, 0));
+        myCanvas.setLayout(new BoxLayout(myCanvas, BoxLayout.X_AXIS));
         final JButton write = new JButton("Print a random number on standard output");
         final JButton myWrite = new JButton("My window: Print a random number on standard output");
-        canvas.add(write, BorderLayout.CENTER);
+        // canvas.add(write, BorderLayout.CENTER);
         myCanvas.add(myWrite, BorderLayout.CENTER);
+        canvas.add(myCanvas, BorderLayout.CENTER);
         frame.setContentPane(canvas);
-        frame.setContentPane(myCanvas);
+        // frame.setContentPane(myCanvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        final JTextField textField = new JTextField();
+        textField.setText("Result: ");
+        textField.setEditable(false);
+        canvas.add(textField, BorderLayout.NORTH);
+
+        /*
+         * final JLabel label = new JLabel();
+         * // randomGenerator = textField.getText();
+         * // label.setText("Result" + randomGenerator);
+         */
         /*
          * Handlers
          */
-        write.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                System.out.println(randomGenerator.nextInt());
-            }
-        });
+        /*
+         * write.addActionListener(new ActionListener() {
+         * 
+         * @Override
+         * public void actionPerformed(final ActionEvent e) {
+         * System.out.println(randomGenerator.nextInt());
+         * }
+         * });
+         */
         myWrite.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(final ActionEvent event) {
                 // TODO Auto-generated method stub
-                System.out.println(randomGenerator.nextInt());
+                // System.out.println(randomGenerator.nextInt());
+                textField.setText(String.valueOf(randomGenerator.nextInt()));
             }
         });
     }
@@ -102,6 +120,7 @@ public class MiniGUI {
          * sullo schermo. I risultati possono variare, ma è generalmente la scelta
          * migliore.
          */
+
         frame.setLocationByPlatform(true);
         /*
          * Resize the frame to minimum size
